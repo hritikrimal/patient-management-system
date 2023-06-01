@@ -231,20 +231,11 @@ $("#country").change(function () {
 		});
 		// $("#province").show();
 	} else {
-		// $("#province").empty().hide();
 		$("#province").html('<option value="None">None</option>').show();
 		$("#district").html('<option value="None">None</option>').show();
 		$("#municipality").html('<option value="None">None</option>').show();
 	}
 });
-
-// $.getJSON("assets/json/province.json", function (data) {
-// 	data.forEach(function (item) {
-// 		$("#province").append(
-// 			`<option value="${item.province}">${item.province}</option>`
-// 		);
-// 	});
-// });
 
 // Add event listener to the "Province" dropdown
 $("#province").change(function () {
