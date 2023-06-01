@@ -1,0 +1,15 @@
+/* modal backgroundcolor */
+/* #m_body {
+	background-color: antiquewhite;
+} */
+/* flash message color */
+#flash-messages {
+	color: red;
+}
+.bold {
+	font-weight: bold;
+}
+table#myTable td {
+	font-size: 14px;
+	padding: 8px;
+}
