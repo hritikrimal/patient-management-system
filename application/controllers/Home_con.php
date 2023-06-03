@@ -81,7 +81,9 @@ class Home_con extends CI_Controller
 
         if ($this->form_validation->run() == true) {
             $response['success'] = true;
-            $this->Home_mod->insert_billing();
+
+            $last_sample = $this->Home_mod->insert_billing();
+            $response['data'] = $last_sample;
         } else {
             $response['success'] = false;
             $response['errors'] =  strip_tags(validation_errors());
@@ -101,6 +103,28 @@ class Home_con extends CI_Controller
             $response['success'] = false;
             //     $response['errors'] = "No Data Available";
         }
+        echo json_encode($response);
+    }
+
+    public function test_item()
+    {
+        $this->form_validation->set_rules('sample_id', 'Sample Id', 'required');
+        $this->form_validation->set_rules('p_id', 'Patient Id', 'required');
+        $this->form_validation->set_rules('testName', 'Test Item', 'required');
+        $this->form_validation->set_rules('quantity', 'quantity', 'required');
+        $this->form_validation->set_rules('price', 'price', 'required');
+
+        $response = array(); // Initialize response array
+
+        if ($this->form_validation->run() == true) {
+            $response['success'] = true;
+
+            $this->Home_mod->insert_test_name();
+        } else {
+            $response['success'] = false;
+            $response['errors'] =  strip_tags(validation_errors());
+        }
+
         echo json_encode($response);
     }
 }

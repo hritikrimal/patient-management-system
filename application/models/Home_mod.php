@@ -63,6 +63,24 @@ class Home_mod extends CI_Model
         $bill['net_total'] = $this->input->post("grand_total");
         if ($bill) {
             $this->db->insert('patient_billing', $bill);
+            $latest_sample_no = $this->db->insert_id();
+            return $latest_sample_no;
+        } else {
+            return false;
+        }
+    }
+
+    public function insert_test_name()
+    {
+        $test = array();
+        $test['sample_id'] = $this->input->post("sample_id");
+        $test['p_id'] = $this->input->post("p_id");
+        $test['test_items'] = $this->input->post("testName");
+        $test['qty'] = $this->input->post("quantity");
+        $test['unit'] = $this->input->post("unit");
+        $test['price'] = $this->input->post("price");
+        if ($test) {
+            $this->db->insert('test_record ', $test);
         } else {
             return false;
         }
