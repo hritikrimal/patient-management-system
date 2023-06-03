@@ -241,15 +241,122 @@
 
         <!-- reg & billing modal -->
         <div class="modal fade" id="billing-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-xl">.
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <div id="flash-messages"></div>
+
+                        <form id="info_form" class="row g-3 ">
+
+
+                            <div class="col-md-7 ">
+
+                                <label for="bill_date" class="form-label">Date</label>
+                                <input type="text" id="bill_date" disabled name="bill_date">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="p_id" class="form-label">Patient Id</label>
+                                <input type="text" id="p_id" disabled name="p_id">
+                            </div>
+                        </form>
+                        <div class="row">
+                            <form id="bill_form" class="row g-3 ">
+
+                                <div class="col-md-3">
+                                    <label for="test_name" class="form-label">Tast Name</label>
+                                    <input type="text" class="form-control" id="test_name" required name="test_name">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="t_unit" class="form-label">Unit</label>
+                                    <input type="text" class="form-control" id="t_unit" required name="t_unit">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="t_qty" class="form-label">Quantity</label>
+                                    <input type="text" class="form-control" id="t_qty" required name="t_qty">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="t_price" class="form-label">Price</label>
+                                    <input type="text" class="form-control" id="t_price" required name="t_price">
+                                </div>
+                                <!-- <div class="col-md-2">
+                                    <label for="t_disper" class="form-label">Discount %</label>
+                                    <input type="text" class="form-control" id="t_disper" name="t_disper">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="t_disamo" class="form-label">Discount Amount</label>
+                                    <input type="text" class="form-control" id="t_disamo" name="t_disamo">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="t_total" class="form-label">Net Total</label>
+                                    <input type="text" class="form-control" id="t_total" name="t_total">
+                                </div> -->
+                                <div class="col-md-1 mt-1">
+
+
+                                    <button id="but_add" type="button" class="btn btn-primary ">Add</button>
+
+                                </div>
+                        </div>
+
+
+                        </form>
                     </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered" id="item-list">
+                                <colgroup>
+                                    <col width="40%">
+                                    <col width="10%">
+                                    <col width="10">
+                                    <col width="15%">
+                                    <col width="15%">
+                                    <!-- <col width="5%"> -->
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <!-- <th class="text-center">SN</th> -->
+                                        <th class="text-center">TEST NAME</th>
+                                        <th class="text-center">QUANTITY</th>
+                                        <th class="text-center">UNIT</th>
+                                        <!-- <th class="text-center">Cost</th> -->
+                                        <th class="text-center">Total</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="text-right" colspan="3">Sub Total</th>
+                                        <th><input type="number" disabled class="form-control" id="sub_total" name="sub_total" value="0"></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-right" colspan="3">Discount %</th>
+                                        <th><input type="text" class="form-control" id="dis_per" name="dis_per" value="0"></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-right" colspan="3">Discount Amount</th>
+                                        <th><input type="text" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th>
+
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-right" colspan="3">Grand Total</th>
+                                        <th><input type="text" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Save changes</button>
@@ -263,15 +370,6 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
     <script src="assets/js/homejs.js"></script>
-    <!-- <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable();
-        });
-    </script> -->
-
-
-
-
 </body>
 
 

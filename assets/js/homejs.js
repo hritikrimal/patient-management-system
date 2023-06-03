@@ -152,6 +152,7 @@ $(document).ready(function () {
 	fetch();
 	fetch();
 	//preview the information on click view
+	// TODO: on and off
 	$(document).on("click", "#view", function () {
 		var Patientid = $(this).attr("value");
 		$.ajax({
@@ -244,7 +245,6 @@ $("#province").change(function () {
 	$("#district")
 		.empty()
 		.append('<option selected disabled value="">Choose...</option>');
-	// .append('<option selected disabled value="">Choose...</option>')
 
 	$.getJSON("assets/json/province.json", function (data) {
 		var districts = data.find(function (item) {
@@ -303,5 +303,113 @@ $("#district").change(function () {
 // modal show on click reg and billing
 $(document).on("click", "#reg_bill", function () {
 	var Patientid = $(this).attr("value");
+	$("#p_id").val(Patientid);
+	var currentDate = new Date();
+	var options = { timeZone: "Asia/Kathmandu" };
+	var formattedDate = currentDate.toLocaleString("en-US", options);
+
+	$("#bill_date").val(formattedDate);
+
 	$("#billing-modal").modal("show");
+});
+
+//on click add
+$(document).ready(function () {
+	$("#but_add").click(function () {
+		// alert();
+		var testName = $("#test_name").val();
+		var quantity = $("#t_qty").val();
+		var unit = $("#t_unit").val();
+		var price = $("#t_price").val();
+
+		$("#bill_form")[0].reset();
+
+		// Calculate total cost
+		var totalCost = parseFloat(quantity) * parseFloat(unit);
+		// if (testName === "") {
+		// 	displayFlashMessage("Name is required !", 3000); // Display for 3 seconds
+		// 	return;
+		// }
+		// Append a new row to the table body
+		$("#item-list tbody").append(
+			"<tr>" +
+				"<td>" +
+				testName +
+				"</td>" +
+				"<td>" +
+				quantity +
+				"</td>" +
+				"<td>" +
+				unit +
+				"</td>" +
+				"<td>" +
+				price +
+				"</td>" +
+				"<td><button class='btn btn-danger btn-sm remove-row' id='remove_btn'  onclick='rem_item($(this))'>Remove</button></td>" +
+				"</tr>"
+		);
+
+		var subTotal = parseFloat($("#sub_total").val() || 0);
+		subTotal += totalCost;
+		$("#sub_total").val(subTotal);
+		$("#grand_total").val(subTotal);
+		$("#dis_per").val("0");
+		$("#dis_amnt").val("0");
+	});
+});
+
+//insert unit and qty to get total
+$(document).ready(function () {
+	$("#t_unit, #t_qty").on("input", function () {
+		var unit = parseFloat($("#t_unit").val());
+		var qty = parseFloat($("#t_qty").val());
+
+		// Check if both unit and quantity are valid numbers
+		if (!isNaN(unit) && !isNaN(qty)) {
+			var price = unit * qty;
+			$("#t_price").val(price);
+		}
+	});
+});
+
+//on input discount %
+$(document).ready(function () {
+	$("#dis_per").on("input", function () {
+		// Get input values
+		var subTotal = parseFloat($("#sub_total").val()) || 0;
+		var discountPercent = parseFloat($(this).val()) || 0;
+
+		// Calculate discount amount
+		var discountAmount = (subTotal * discountPercent) / 100;
+
+		// Update discount amount field
+		$("#dis_amnt").val(discountAmount);
+
+		// Calculate grand total
+		var grandTotal = subTotal - discountAmount;
+
+		// Update grand total field
+		$("#grand_total").val(grandTotal);
+	});
+});
+
+// on click rmove button
+$(document).ready(function () {
+	$(document).on("click", "#remove_btn", function () {
+		var row = $(this).closest("tr");
+		$("#dis_per").val("0").trigger("input");
+		$("#dis_amnt").val("0");
+
+		var price = row.find("td:eq(3)").text();
+		var total = $("#sub_total").val();
+		var final = total - price;
+		$("#sub_total").val(final);
+
+		var grand = $("#grand_total").val();
+		var final_grand = grand - price;
+		$("#grand_total").val(final_grand);
+
+		row.remove();
+		// calc_total();
+	});
 });
