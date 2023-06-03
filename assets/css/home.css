@@ -1,4 +1,5 @@
-#flash-messages {
+#flash-messages,
+#flash-messages2 {
 	color: red;
 }
 .bold {
@@ -11,3 +12,9 @@ table#myTable td {
 /* #but_add {
 	margin-right: 4rem;
 } */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
+}

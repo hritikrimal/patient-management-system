@@ -71,12 +71,12 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="age" class="form-label bold">Age</label>
-                                <input type="text" class="form-control" id="age" placeholder="age" required>
+                                <input type="number" class="form-control" id="age" placeholder="age" required>
 
                             </div>
                             <div class="col-md-6">
                                 <label for="p_number" class="form-label bold">Mobile Number</label>
-                                <input type="text" class="form-control" id="p_number" placeholder="contact number" required>
+                                <input type="number" class="form-control" id="p_number" placeholder="contact number" required>
 
                             </div>
 
@@ -189,7 +189,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="new-p_number" class="form-label">Mobile Number</label>
-                                <input type="text" class="form-control" id="new-p_number" disabled name="new-p_number" placeholder="Mobile Number" required>
+                                <input type="number" class="form-control" id="new-p_number" disabled name="new-p_number" placeholder="Mobile Number" required>
                             </div>
 
                             <div class="col-md-6">
@@ -248,7 +248,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div id="flash-messages"></div>
+
 
                         <form id="info_form" class="row g-3 ">
 
@@ -261,11 +261,12 @@
 
                             <div class="col-md-4">
                                 <label for="p_id" class="form-label">Patient Id</label>
-                                <input type="text" id="p_id" disabled name="p_id">
+                                <input type="number" id="p_id" disabled name="p_id">
                             </div>
                         </form>
                         <div class="row">
                             <form id="bill_form" class="row g-3 ">
+                                <div id="flash-messages2"></div>
 
                                 <div class="col-md-3">
                                     <label for="test_name" class="form-label">Tast Name</label>
@@ -273,15 +274,15 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="t_unit" class="form-label">Unit</label>
-                                    <input type="text" class="form-control" id="t_unit" required name="t_unit">
+                                    <input type="number" class="form-control" id="t_unit" required name="t_unit">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="t_qty" class="form-label">Quantity</label>
-                                    <input type="text" class="form-control" id="t_qty" required name="t_qty">
+                                    <input type="number" class="form-control" id="t_qty" required name="t_qty">
                                 </div>
                                 <div class="col-md-2">
                                     <label for="t_price" class="form-label">Price</label>
-                                    <input type="text" class="form-control" id="t_price" required name="t_price">
+                                    <input type="number" class="form-control" id="t_price" disabled required name="t_price">
                                 </div>
                                 <!-- <div class="col-md-2">
                                     <label for="t_disper" class="form-label">Discount %</label>
@@ -339,17 +340,17 @@
                                     </tr>
                                     <tr>
                                         <th class="text-right" colspan="3">Discount %</th>
-                                        <th><input type="text" class="form-control" id="dis_per" name="dis_per" value="0"></th>
+                                        <th><input type="number" class="form-control" id="dis_per" name="dis_per" value="0"></th>
                                     </tr>
                                     <tr>
                                         <th class="text-right" colspan="3">Discount Amount</th>
-                                        <th><input type="text" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th>
+                                        <th><input type="number" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th>
 
                                         <th></th>
                                     </tr>
                                     <tr>
                                         <th class="text-right" colspan="3">Grand Total</th>
-                                        <th><input type="text" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th>
+                                        <th><input type="number" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -359,7 +360,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="regbill_btn">Save changes</button>
                     </div>
                 </div>
             </div>
