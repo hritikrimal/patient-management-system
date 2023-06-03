@@ -51,4 +51,20 @@ class Home_mod extends CI_Model
             return false;
         }
     }
+
+    public function insert_billing()
+    {
+        $bill = array();
+        $bill['P_id'] = $this->input->post("p_id");
+        $bill['billing_date'] = $this->input->post("bill_date");
+        $bill['subtotal'] = $this->input->post("sub_total");
+        $bill['discount_percent'] = $this->input->post("dis_per");
+        $bill['discount_amount'] = $this->input->post("dis_amnt");
+        $bill['net_total'] = $this->input->post("grand_total");
+        if ($bill) {
+            $this->db->insert('patient_billing', $bill);
+        } else {
+            return false;
+        }
+    }
 }

@@ -67,4 +67,40 @@ class Home_con extends CI_Controller
 
         echo json_encode($response);
     }
+
+    public function save_billing()
+    {
+        $this->form_validation->set_rules('bill_date', 'Date', 'required');
+        $this->form_validation->set_rules('p_id', 'Patient Id', 'required');
+        $this->form_validation->set_rules('sub_total', 'Sub total', 'required');
+        $this->form_validation->set_rules('dis_per', 'Discount percentage', 'required');
+        $this->form_validation->set_rules('dis_amnt', 'discount amount', 'required');
+        $this->form_validation->set_rules('grand_total', 'Grand Total', 'required');
+
+        $response = array(); // Initialize response array
+
+        if ($this->form_validation->run() == true) {
+            $response['success'] = true;
+            $this->Home_mod->insert_billing();
+        } else {
+            $response['success'] = false;
+            $response['errors'] =  strip_tags(validation_errors());
+        }
+
+        echo json_encode($response);
+    }
+    public function getdate()
+    {
+        date_default_timezone_set('Asia/Kathmandu');
+        $dateTime = date('Y-m-d H:i:s');
+        // var_dump($dateTime);
+        if ($dateTime) {
+            $response['success'] = true;
+            $response['data'] = $dateTime;
+        } else {
+            $response['success'] = false;
+            //     $response['errors'] = "No Data Available";
+        }
+        echo json_encode($response);
+    }
 }

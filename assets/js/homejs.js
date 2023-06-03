@@ -284,11 +284,16 @@ $("#district").change(function () {
 $(document).on("click", "#reg_bill", function () {
 	var Patientid = $(this).attr("value");
 	$("#p_id").val(Patientid);
-	var currentDate = new Date();
-	var options = { timeZone: "Asia/Kathmandu" };
-	var formattedDate = currentDate.toLocaleString("en-US", options);
-
-	$("#bill_date").val(formattedDate);
+	$.ajax({
+		url: "Home_con/getdate",
+		dataType: "json",
+		type: "get",
+		data: {},
+		success: function (response) {
+			// console.log(response.data);
+			$("#bill_date").val(response.data);
+		},
+	});
 
 	$("#billing-modal").modal("show");
 
@@ -409,12 +414,44 @@ $(document).on("click", "#reg_bill", function () {
 		var dis_per = $("#dis_per").val();
 		var dis_amnt = $("#dis_amnt").val();
 		var grand_total = $("#grand_total").val();
-		alert(bill_date);
-		alert(p_id);
-		alert(sub_total);
-		alert(dis_per);
-		alert(dis_amnt);
-		alert(grand_total);
+		var items = [];
+
+		$("#item-list tbody tr").each(function () {
+			var row = $(this); // Current <tr> element
+			var testName = row.find("td:nth-child(1)").text(); // Value of the first <td>
+			var quantity = row.find("td:nth-child(2)").text(); // Value of the second <td>
+			var unit = row.find("td:nth-child(3)").text(); // Value of the third <td>
+			var price = row.find("td:nth-child(4)").text(); // Value of the fourth <td>
+
+			// Create an object to represent the row data
+			var item = {
+				testName: testName,
+				quantity: quantity,
+				unit: unit,
+				price: price,
+			};
+
+			items.push(item); // Add the row data to the items array
+		});
+
+		$.ajax({
+			url: "Home_con/save_billing",
+			dataType: "json",
+			type: "post",
+			data: {
+				bill_date: bill_date,
+				p_id: p_id,
+				sub_total: sub_total,
+				dis_per: dis_per,
+				dis_amnt: dis_amnt,
+				grand_total: grand_total,
+			},
+			success: function (response) {
+				console.log(response);
+			},
+		});
+
+		// console.log(items);
 	});
 });
 // for flash mesage

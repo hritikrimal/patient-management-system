@@ -345,9 +345,9 @@
                                     <tr>
                                         <th class="text-right" colspan="3">Discount Amount</th>
                                         <th><input type="number" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th>
-
                                         <th></th>
                                     </tr>
+
                                     <tr>
                                         <th class="text-right" colspan="3">Grand Total</th>
                                         <th><input type="number" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th>
