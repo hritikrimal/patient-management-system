@@ -353,8 +353,8 @@ $(document).ready(function () {
 		subTotal += totalCost;
 		$("#sub_total").val(subTotal);
 		$("#grand_total").val(subTotal);
-		$("#dis_per").val("0");
-		$("#dis_amnt").val("0");
+		var discount_tab = $("#dis_per").val();
+		$("#dis_per").val(discount_tab).trigger("input");
 	});
 });
 
@@ -369,6 +369,22 @@ $(document).ready(function () {
 			var price = unit * qty;
 			$("#t_price").val(price);
 		}
+	});
+});
+
+// on click rmove button
+$(document).ready(function () {
+	$(document).on("click", "#remove_btn", function () {
+		var row = $(this).closest("tr");
+
+		var price = row.find("td:eq(3)").text();
+		var total = $("#sub_total").val();
+		var final = total - price;
+		$("#sub_total").val(final);
+
+		var discount_tab = $("#dis_per").val();
+		$("#dis_per").val(discount_tab).trigger("input");
+		row.remove();
 	});
 });
 
@@ -390,26 +406,5 @@ $(document).ready(function () {
 
 		// Update grand total field
 		$("#grand_total").val(grandTotal);
-	});
-});
-
-// on click rmove button
-$(document).ready(function () {
-	$(document).on("click", "#remove_btn", function () {
-		var row = $(this).closest("tr");
-		$("#dis_per").val("0").trigger("input");
-		$("#dis_amnt").val("0");
-
-		var price = row.find("td:eq(3)").text();
-		var total = $("#sub_total").val();
-		var final = total - price;
-		$("#sub_total").val(final);
-
-		var grand = $("#grand_total").val();
-		var final_grand = grand - price;
-		$("#grand_total").val(final_grand);
-
-		row.remove();
-		// calc_total();
 	});
 });
