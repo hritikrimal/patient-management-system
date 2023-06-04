@@ -33,44 +33,60 @@ $(document).ready(function () {
 		var number_pattern = /^[9]\d{9}$/;
 
 		if (name === "") {
-			displayFlashMessage("Name is required !", 3000); // Display for 3 seconds
+			displayFlashMessage("Name is required!", 3000, "flash-messages1");
 			return;
 		}
 		if (!pattern.test(name)) {
-			displayFlashMessage("Name must contain only alphabets and spaces!", 3000);
+			displayFlashMessage(
+				"Name must contain only alphabets and spaces!",
+				3000,
+				"flash-messages1"
+			);
 			return;
 		}
 		if (age === "") {
-			displayFlashMessage("Age is required !", 3000); // Display for 3 seconds
+			displayFlashMessage("Invalid Age !", 3000, "flash-messages1"); // Display for 3 seconds
 			return;
 		}
 		if (!age_pattern.test(age)) {
-			displayFlashMessage("Age must contain only numeric!", 3000);
+			displayFlashMessage(
+				"Age must contain only numeric!",
+				3000,
+				"flash-messages1"
+			);
 			return;
 		}
 		if (number === "") {
-			displayFlashMessage("Number is required !", 3000); // Display for 3 seconds
+			displayFlashMessage(
+				"Number (98********) is required !",
+				3000,
+				"flash-messages1"
+			); // Display for 3 seconds
 			return;
 		}
 		if (!number_pattern.test(number)) {
-			displayFlashMessage("Invalid Number!", 3000);
+			displayFlashMessage("Invalid Number!", 3000, "flash-messages1");
 			return;
 		}
 		if (!country || !province || !district || !municipality) {
-			displayFlashMessage("Please select from dropdown !", 3000);
+			displayFlashMessage(
+				"Please select from dropdown !",
+				3000,
+				"flash-messages1"
+			);
 			return;
 		}
 
 		if (address === "") {
-			displayFlashMessage("Address is required !", 3000); // Display for 3 seconds
+			displayFlashMessage("Address is required !", 3000, "flash-messages1"); // Display for 3 seconds
 			return;
 		}
 		if (gender === undefined || gender === "") {
-			displayFlashMessage("Gender is required!", 3000); // Display for 3 seconds
+			displayFlashMessage("Gender is required!", 3000, "flash-messages1"); // Display for 3 seconds
 			return;
 		}
 		if (selectedLanguages.length === 0) {
-			displayFlashMessage("Languages is required !", 3000); // Display for 3 seconds
+			displayFlashMessage("Languages is required !", 3000, "flash-messages1"); // Display for 3 seconds
 			return;
 		}
 
@@ -150,7 +166,7 @@ $(document).ready(function () {
 
 	// Call the fetch function to populate the table and initialize the DataTable
 	fetch();
-	fetch();
+
 	//preview the information on click view
 	// TODO: on and off
 	$(document).on("click", "#view", function () {
@@ -210,7 +226,6 @@ $("#country").change(function () {
 				);
 			});
 		});
-		// $("#province").show();
 	} else {
 		$("#province").html('<option value="None">None</option>').show();
 		$("#district").html('<option value="None">None</option>').show();
@@ -218,7 +233,7 @@ $("#country").change(function () {
 	}
 });
 
-// Add event listener to the "Province" dropdown
+// Province dropdown
 $("#province").change(function () {
 	var selectedProvince = $(this).val();
 
@@ -290,8 +305,12 @@ $(document).on("click", "#reg_bill", function () {
 		type: "get",
 		data: {},
 		success: function (response) {
-			// console.log(response.data);
-			$("#bill_date").val(response.data);
+			if (response.success) {
+				// console.log(response.data);
+				$("#bill_date").val(response.data);
+			} else {
+				alert(response.errors);
+			}
 		},
 	});
 
@@ -306,20 +325,21 @@ $(document).on("click", "#reg_bill", function () {
 			var unit = $("#t_unit").val();
 			var price = $("#t_price").val();
 			if (!testName) {
-				displayFlashMessage("Test Name is required !", 3000); // Display for 3 seconds
+				displayFlashMessage("Test Name is required!", 3000, "flash-messages2");
 				return;
 			}
+
 			if (!unit) {
-				displayFlashMessage("Unit is required !", 3000); // Display for 3 seconds
+				displayFlashMessage("Unit is required !", 3000, "flash-messages2"); // Display for 3 seconds
 				return;
 			}
 			if (!quantity) {
-				displayFlashMessage("Quantity is required !", 3000); // Display for 3 seconds
+				displayFlashMessage("Quantity is required !", 3000, "flash-messages2"); // Display for 3 seconds
 				return;
 			}
 
 			if (!price) {
-				displayFlashMessage("Price is required !", 3000); // Display for 3 seconds
+				displayFlashMessage("Price is required !", 3000, "flash-messages2"); // Display for 3 seconds
 				return;
 			}
 			$("#bill_form")[0].reset();
@@ -406,12 +426,12 @@ $(document).on("click", "#reg_bill", function () {
 			$("#grand_total").val(grandTotal);
 		});
 	});
-
+	//insert item in database
 	$(document).on("click", "#regbill_btn", function () {
 		var total = $("#sub_total").val();
 
 		if (parseFloat(total) === 0) {
-			displayFlashMessage("Please insert in table! !", 3000); // Display for 3 seconds
+			displayFlashMessage("Please insert the form !", 3000, "flash-messages2"); // Display for 3 seconds
 			return;
 		}
 
@@ -435,44 +455,67 @@ $(document).on("click", "#reg_bill", function () {
 				grand_total: grand_total,
 			},
 			success: function (response) {
-				// console.log(response);
-				var sample_id = response.data;
-				// alert(sample_id);
-				var items = [];
+				if (response.success) {
+					// console.log(response);
+					var sample_id = response.data;
+					// alert(sample_id);
 
-				$("#item-list tbody tr").each(function () {
-					var row = $(this); // Current <tr> element
-					var testName = row.find("td:nth-child(1)").text(); // Value of the first <td>
-					var quantity = row.find("td:nth-child(2)").text(); // Value of the second <td>
-					var unit = row.find("td:nth-child(3)").text(); // Value of the third <td>
-					var price = row.find("td:nth-child(4)").text(); // Value of the fourth <td>
+					//insert item in database after insert billing information
+					$("#item-list tbody tr").each(function () {
+						var row = $(this); // Current <tr> element
+						var testName = row.find("td:nth-child(1)").text(); // Value of the first <td>
+						var quantity = row.find("td:nth-child(2)").text(); // Value of the second <td>
+						var unit = row.find("td:nth-child(3)").text(); // Value of the third <td>
+						var price = row.find("td:nth-child(4)").text(); // Value of the fourth <td>
 
-					$.ajax({
-						url: "Home_con/test_item",
-						dataType: "json",
-						type: "post",
-						data: {
-							sample_id: sample_id,
-							p_id: p_id,
-							testName: testName,
-							quantity: quantity,
-							unit: unit,
-							price: price,
-						},
-						success: function (response) {
-							console.log(response);
-							$("#billing-modal").modal("hide");
-						},
+						$.ajax({
+							url: "Home_con/test_item",
+							dataType: "json",
+							type: "post",
+							data: {
+								sample_id: sample_id,
+								p_id: p_id,
+								testName: testName,
+								quantity: quantity,
+								unit: unit,
+								price: price,
+							},
+							success: function (response) {
+								if (response.success) {
+									// console.log(response);
+									$("#billing-modal").modal("hide");
+								} else {
+									if (response.errors) {
+										// Display validation errors as flash messages
+										alert(response.errors);
+									}
+								}
+							},
+						});
+
+						// items.push(item); // Add the row data to the items array
 					});
-
-					// items.push(item); // Add the row data to the items array
-				});
+				} else {
+					if (response.errors) {
+						// Display validation errors as flash messages
+						alert(response.errors);
+					}
+				}
 			},
 		});
 	});
 });
+// discount % validation
+$("#dis_per").on("input", function () {
+	var discount_percentage = parseInt($(this).val());
+
+	if (discount_percentage < 0 || discount_percentage > 100) {
+		$(this).val(0);
+	}
+});
+
 // for flash mesage
-function displayFlashMessage(message, duration) {
+function displayFlashMessage(message, duration, targetElementId) {
 	var flashMessage = $(
 		'<div class="toast w-100" role="alert" aria-live="assertive" aria-atomic="true">' +
 			'<div class="toast-body">' +
@@ -481,9 +524,7 @@ function displayFlashMessage(message, duration) {
 			"</div>"
 	);
 
-	$("#flash-messages").append(flashMessage);
-	$("#flash-messages2").append(flashMessage);
-
+	$("#" + targetElementId).append(flashMessage);
 	var toast = new bootstrap.Toast(flashMessage[0]);
 	toast.show();
 

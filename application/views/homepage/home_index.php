@@ -1,6 +1,10 @@
 <!-- css for this page  -->
 <link rel="stylesheet" type="text/css" href="assets/css/home.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css">
+<!-- datatable cdn css -->
+<link rel="stylesheet" type="text/css" href="assets/datatable/data_tables.css">
+
+
+
 
 
 
@@ -59,7 +63,8 @@
                         <button type="button" id="cross_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div id="m_body" class="modal-body">
-                        <div id="flash-messages"></div>
+
+                        <div id="flash-messages1"></div>
 
 
                         <form id="form" class="row g-3">
@@ -269,6 +274,7 @@
                                 <div id="flash-messages2"></div>
 
 
+
                                 <div class="col-md-3">
                                     <label for="test_name" class="form-label">Tast Name</label>
                                     <input type="text" class="form-control" id="test_name" required name="test_name">
@@ -300,7 +306,7 @@
                                 <div class="col-md-1 mt-1">
 
 
-                                    <button id="but_add" type="button" class="btn btn-primary ">Add</button>
+                                    <button id="but_add" type="button" class="btn btn-primary mt-5 ">Add</button>
 
                                 </div>
                         </div>
@@ -369,9 +375,12 @@
 
     </div>
     <!-- script for this page -->
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script> -->
 
+    <script src="assets/datatable/data_tables.js"></script>
     <script src="assets/js/homejs.js"></script>
+
+
 </body>
 
 
