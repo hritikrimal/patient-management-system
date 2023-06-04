@@ -108,9 +108,9 @@ $(document).ready(function () {
 			},
 			success: function (response) {
 				if (response.success) {
+					fetch();
 					$("#infomodal").modal("hide");
 					$("#form")[0].reset();
-					fetch();
 
 					console.log(response);
 				} else {
@@ -125,47 +125,46 @@ $(document).ready(function () {
 	});
 
 	//table fetch
-	$(document).ready(function () {
-		function fetch() {
-			$.ajax({
-				url: "Home_con/fetch_info",
-				dataType: "json",
-				type: "get",
-				success: function (response) {
-					if (response.success) {
-						var tbody = "";
-						var i = "1";
-						for (var key in response.infodata) {
-							tbody += "<tr>";
-							tbody += "<td>" + i++ + "</td>";
-							tbody += "<td>" + response.infodata[key]["Patientid"] + "</td>";
-							tbody += "<td>" + response.infodata[key]["Name"] + "</td>";
-							tbody += "<td>" + response.infodata[key]["Age"] + "</td>";
-							tbody += "<td>" + response.infodata[key]["Gender"] + "</td>";
-							tbody += "<td>" + response.infodata[key]["District"] + "</td>";
-							tbody += "<td>" + response.infodata[key]["Address"] + "</td>";
-							tbody += "<td>" + response.infodata[key]["DateTime"] + "</td>";
-							tbody += `<td>
+
+	function fetch() {
+		$.ajax({
+			url: "Home_con/fetch_info",
+			dataType: "json",
+			type: "get",
+			success: function (response) {
+				if (response.success) {
+					var tbody = "";
+					var i = "1";
+					for (var key in response.infodata) {
+						tbody += "<tr>";
+						tbody += "<td>" + i++ + "</td>";
+						tbody += "<td>" + response.infodata[key]["Patientid"] + "</td>";
+						tbody += "<td>" + response.infodata[key]["Name"] + "</td>";
+						tbody += "<td>" + response.infodata[key]["Age"] + "</td>";
+						tbody += "<td>" + response.infodata[key]["Gender"] + "</td>";
+						tbody += "<td>" + response.infodata[key]["District"] + "</td>";
+						tbody += "<td>" + response.infodata[key]["Address"] + "</td>";
+						tbody += "<td>" + response.infodata[key]["DateTime"] + "</td>";
+						tbody += `<td>
                         <div class="d-flex">
                             <a href="#" id="view" class="btn btn-primary btn-sm m-1 view" value="${response.infodata[key]["Patientid"]}">View</a>
                             <a href="#" id="reg_bill" class="btn btn-primary btn-sm m-1 reg_bill" value="${response.infodata[key]["Patientid"]}">Reg & Billing</a>
                         </div>
                     </td>`;
-							tbody += "</tr>";
-						}
-						$("#tbody").html(tbody);
-
-						// Initialize DataTable
-						$("#myTable").DataTable();
-					} else {
-						// Display validation errors
-						alert(response.errors);
+						tbody += "</tr>";
 					}
-				},
-			});
-		}
-		fetch();
-	});
+					$("#tbody").html(tbody);
+
+					// Initialize DataTable
+					$("#myTable").DataTable();
+				} else {
+					// Display validation errors
+					alert(response.errors);
+				}
+			},
+		});
+	}
+	fetch();
 
 	// Call the fetch function to populate the table and initialize the DataTable
 
