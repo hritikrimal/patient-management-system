@@ -24,7 +24,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Billing</a>
+                        <a class="nav-link" href="<?php echo base_url() . 'Home_con/invoice_view' ?>">Billing</a>
                     </li>
                 </ul>
             </div>
@@ -390,8 +390,7 @@
         </div>
 
     </div>
-    <!-- script for this page -->
-    <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script> -->
+
 
     <script src="assets/datatable/data_tables.js"></script>
     <script src="assets/js/homejs.js"></script>

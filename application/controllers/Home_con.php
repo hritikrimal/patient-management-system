@@ -127,4 +127,11 @@ class Home_con extends CI_Controller
 
         echo json_encode($response);
     }
+
+
+    public function invoice_view()
+    {
+        $this->load->view('include/header');
+        $this->load->view('homepage/invoice');
+    }
 }
