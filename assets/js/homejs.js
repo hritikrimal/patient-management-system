@@ -434,72 +434,85 @@ $(document).on("click", "#reg_bill", function () {
 			displayFlashMessage("Please insert the form !", 3000, "flash-messages2"); // Display for 3 seconds
 			return;
 		}
-
-		var bill_date = $("#bill_date").val();
-		var p_id = $("#p_id").val();
-		var sub_total = $("#sub_total").val();
-		var dis_per = $("#dis_per").val();
-		var dis_amnt = $("#dis_amnt").val();
-		var grand_total = $("#grand_total").val();
-
 		$.ajax({
-			url: "Home_con/save_billing",
+			url: "Home_con/getdate",
 			dataType: "json",
-			type: "post",
-			data: {
-				bill_date: bill_date,
-				p_id: p_id,
-				sub_total: sub_total,
-				dis_per: dis_per,
-				dis_amnt: dis_amnt,
-				grand_total: grand_total,
-			},
+			type: "get",
+			data: {},
 			success: function (response) {
 				if (response.success) {
-					// console.log(response);
-					var sample_id = response.data;
-					// alert(sample_id);
+					// console.log(response.data);
+					var bill_dates = response.data;
 
-					//insert item in database after insert billing information
-					$("#item-list tbody tr").each(function () {
-						var row = $(this); // Current <tr> element
-						var testName = row.find("td:nth-child(1)").text(); // Value of the first <td>
-						var quantity = row.find("td:nth-child(2)").text(); // Value of the second <td>
-						var unit = row.find("td:nth-child(3)").text(); // Value of the third <td>
-						var price = row.find("td:nth-child(4)").text(); // Value of the fourth <td>
+					var p_id = $("#p_id").val();
+					var sub_total = $("#sub_total").val();
+					var dis_per = $("#dis_per").val();
+					var dis_amnt = $("#dis_amnt").val();
+					var grand_total = $("#grand_total").val();
 
-						$.ajax({
-							url: "Home_con/test_item",
-							dataType: "json",
-							type: "post",
-							data: {
-								sample_id: sample_id,
-								p_id: p_id,
-								testName: testName,
-								quantity: quantity,
-								unit: unit,
-								price: price,
-							},
-							success: function (response) {
-								if (response.success) {
-									// console.log(response);
-									$("#billing-modal").modal("hide");
-								} else {
-									if (response.errors) {
-										// Display validation errors as flash messages
-										alert(response.errors);
-									}
+					$.ajax({
+						url: "Home_con/save_billing",
+						dataType: "json",
+						type: "post",
+						data: {
+							bill_date: bill_dates,
+							p_id: p_id,
+							sub_total: sub_total,
+							dis_per: dis_per,
+							dis_amnt: dis_amnt,
+							grand_total: grand_total,
+						},
+						success: function (response) {
+							if (response.success) {
+								// console.log(response);
+								var sample_id = response.data;
+								// alert(sample_id);
+
+								//insert item in database after insert billing information
+								$("#item-list tbody tr").each(function () {
+									var row = $(this); // Current <tr> element
+									var testName = row.find("td:nth-child(1)").text(); // Value of the first <td>
+									var quantity = row.find("td:nth-child(2)").text(); // Value of the second <td>
+									var unit = row.find("td:nth-child(3)").text(); // Value of the third <td>
+									var price = row.find("td:nth-child(4)").text(); // Value of the fourth <td>
+
+									$.ajax({
+										url: "Home_con/test_item",
+										dataType: "json",
+										type: "post",
+										data: {
+											sample_id: sample_id,
+											p_id: p_id,
+											testName: testName,
+											quantity: quantity,
+											unit: unit,
+											price: price,
+										},
+										success: function (response) {
+											if (response.success) {
+												// console.log(response);
+												$("#billing-modal").modal("hide");
+											} else {
+												if (response.errors) {
+													// Display validation errors as flash messages
+													alert(response.errors);
+												}
+											}
+										},
+									});
+
+									// items.push(item); // Add the row data to the items array
+								});
+							} else {
+								if (response.errors) {
+									// Display validation errors as flash messages
+									alert(response.errors);
 								}
-							},
-						});
-
-						// items.push(item); // Add the row data to the items array
+							}
+						},
 					});
 				} else {
-					if (response.errors) {
-						// Display validation errors as flash messages
-						alert(response.errors);
-					}
+					alert(response.errors);
 				}
 			},
 		});
