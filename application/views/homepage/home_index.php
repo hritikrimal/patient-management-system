@@ -292,13 +292,12 @@
                                 <div id="flash-messages2"></div>
 
 
-
                                 <div class="col-md-3">
-                                    <label for="test_name" class="form-label">Tast Name</label>
+                                    <label for="test_name" class="form-label">Test Name</label>
                                     <input type="text" class="form-control" id="test_name" required name="test_name">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="t_unit" class="form-label">Unit</label>
+                                    <label for="t_unit" class="form-label">Unit price</label>
                                     <input type="number" class="form-control" id="t_unit" required name="t_unit">
                                 </div>
                                 <div class="col-md-3">
@@ -356,27 +355,29 @@
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="items-list">
                                 </tbody>
                                 <tfoot>
-                                    <tr>
-                                        <th class="text-right" colspan="3">Sub Total</th>
-                                        <th><input type="number" disabled class="form-control" id="sub_total" name="sub_total" value="0"></th>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-right" colspan="3">Discount %</th>
-                                        <th><input type="number" class="form-control" id="dis_per" name="dis_per" value="0"></th>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-right" colspan="3">Discount Amount</th>
-                                        <th><input type="number" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th>
-                                        <th></th>
-                                    </tr>
+                                    <form id="bills_form">
+                                        <tr>
+                                            <th class="text-right" colspan="3">Sub Total</th>
+                                            <th><input type="number" disabled class="form-control" id="sub_total" name="sub_total" value="0"></th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-right" colspan="3">Discount %</th>
+                                            <th><input type="number" class="form-control" id="dis_per" name="dis_per" value="0"></th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-right" colspan="3">Discount Amount</th>
+                                            <th><input type="number" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th>
+                                            <th></th>
+                                        </tr>
 
-                                    <tr>
-                                        <th class="text-right" colspan="3">Grand Total</th>
-                                        <th><input type="number" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th>
-                                    </tr>
+                                        <tr>
+                                            <th class="text-right" colspan="3">Grand Total</th>
+                                            <th><input type="number" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th>
+                                        </tr>
+                                    </form>
                                 </tfoot>
                             </table>
                         </div>

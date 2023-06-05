@@ -320,84 +320,27 @@ $("#district").change(function () {
 // modal show on click reg and billing
 $(document).on("click", "#reg_bill", function () {
 	var Patientid = $(this).attr("value");
-	$("#p_id").val(Patientid);
 	$.ajax({
 		url: "Home_con/getdate",
 		dataType: "json",
-		type: "get",
+		type: "post",
 		data: {},
 		success: function (response) {
 			if (response.success) {
 				// console.log(response.data);
+				$("#p_id").val(Patientid);
 				$("#bill_date").val(response.data);
+
+				$("#billing-modal").modal("show");
 			} else {
 				alert(response.errors);
 			}
 		},
 	});
 
-	$("#billing-modal").modal("show");
-
 	//on click add
-	$(document).ready(function () {
-		$("#but_add").click(function () {
-			// alert();
-			var testName = $("#test_name").val();
-			var quantity = $("#t_qty").val();
-			var unit = $("#t_unit").val();
-			var price = $("#t_price").val();
-			if (!testName) {
-				displayFlashMessage("Test Name is required!", 3000, "flash-messages2");
-				return;
-			}
 
-			if (!unit) {
-				displayFlashMessage("Unit is required !", 3000, "flash-messages2"); // Display for 3 seconds
-				return;
-			}
-			if (!quantity) {
-				displayFlashMessage("Quantity is required !", 3000, "flash-messages2"); // Display for 3 seconds
-				return;
-			}
-
-			if (!price) {
-				displayFlashMessage("Price is required !", 3000, "flash-messages2"); // Display for 3 seconds
-				return;
-			}
-
-			$("#bill_form")[0].reset();
-
-			// Calculate total cost
-			var totalCost = parseFloat(quantity) * parseFloat(unit);
-
-			// Append a new row to the table body
-			$("#item-list tbody").append(
-				"<tr>" +
-					"<td>" +
-					testName +
-					"</td>" +
-					"<td>" +
-					quantity +
-					"</td>" +
-					"<td>" +
-					unit +
-					"</td>" +
-					"<td>" +
-					price +
-					"</td>" +
-					"<td><button class='btn btn-danger btn-sm remove-row' id='remove_btn'  onclick='rem_item($(this))'>Remove</button></td>" +
-					"</tr>"
-			);
-
-			var subTotal = parseFloat($("#sub_total").val() || 0);
-			subTotal += totalCost;
-			$("#sub_total").val(subTotal);
-			$("#grand_total").val(subTotal);
-			var discount_tab = $("#dis_per").val();
-			// TODO: valid the discount percentage
-			$("#dis_per").val(discount_tab).trigger("input");
-		});
-	});
+	// $("#but_add").click(function () {
 
 	//insert unit and qty to get total
 	$(document).ready(function () {
@@ -413,134 +356,199 @@ $(document).on("click", "#reg_bill", function () {
 		});
 	});
 
-	// on click rmove button
-	$(document).ready(function () {
-		$(document).on("click", "#remove_btn", function () {
-			var row = $(this).closest("tr");
-
-			var price = row.find("td:eq(3)").text();
-			var total = $("#sub_total").val();
-			var final = total - price;
-			$("#sub_total").val(final);
-
-			var discount_tab = $("#dis_per").val();
-			$("#dis_per").val(discount_tab).trigger("input");
-			row.remove();
-		});
-	});
-
-	//on input discount %
-	$(document).ready(function () {
-		$("#dis_per").on("input", function () {
-			// Get input values
-			var subTotal = parseFloat($("#sub_total").val()) || 0;
-			var discountPercent = parseFloat($(this).val()) || 0;
-
-			// Calculate discount amount
-			var discountAmount = (subTotal * discountPercent) / 100;
-
-			// Update discount amount field
-			$("#dis_amnt").val(discountAmount);
-
-			// Calculate grand total
-			var grandTotal = subTotal - discountAmount;
-
-			// Update grand total field
-			$("#grand_total").val(grandTotal);
-		});
-	});
-	//insert item in database
-	$(document).on("click", "#regbill_btn", function () {
-		var total = $("#sub_total").val();
-
-		if (parseFloat(total) === 0) {
-			displayFlashMessage("Please insert the form !", 3000, "flash-messages2"); // Display for 3 seconds
+	$(document).on("click", "#but_add", function () {
+		// alert();
+		var testName = $("#test_name").val();
+		var quantity = $("#t_qty").val();
+		var unit = $("#t_unit").val();
+		var price = $("#t_price").val();
+		// alert(testName);
+		alert();
+		if (!testName) {
+			displayFlashMessage("Test Name is required!", 3000, "flash-messages2");
 			return;
 		}
-		$.ajax({
-			url: "Home_con/getdate",
-			dataType: "json",
-			type: "get",
-			data: {},
-			success: function (response) {
-				if (response.success) {
-					// console.log(response.data);
-					var bill_dates = response.data;
 
-					var p_id = $("#p_id").val();
-					var sub_total = $("#sub_total").val();
-					var dis_per = $("#dis_per").val();
-					var dis_amnt = $("#dis_amnt").val();
-					var grand_total = $("#grand_total").val();
+		if (!unit) {
+			displayFlashMessage("Unit is required !", 3000, "flash-messages2"); // Display for 3 seconds
+			return;
+		}
+		if (!quantity) {
+			displayFlashMessage("Quantity is required !", 3000, "flash-messages2"); // Display for 3 seconds
+			return;
+		}
 
-					$.ajax({
-						url: "Home_con/save_billing",
-						dataType: "json",
-						type: "post",
-						data: {
-							bill_date: bill_dates,
-							p_id: p_id,
-							sub_total: sub_total,
-							dis_per: dis_per,
-							dis_amnt: dis_amnt,
-							grand_total: grand_total,
-						},
-						success: function (response) {
-							if (response.success) {
-								// console.log(response);
-								var sample_id = response.data;
-								// alert(sample_id);
+		if (!price) {
+			displayFlashMessage("Price is required !", 3000, "flash-messages2"); // Display for 3 seconds
+			return;
+		}
+		$("#test_name").val("");
+		$("#t_unit").val(" ");
+		$("#t_qty").val(" ");
+		$("#t_price").val(" ");
 
-								//insert item in database after insert billing information
-								$("#item-list tbody tr").each(function () {
-									var row = $(this); // Current <tr> element
-									var testName = row.find("td:nth-child(1)").text(); // Value of the first <td>
-									var quantity = row.find("td:nth-child(2)").text(); // Value of the second <td>
-									var unit = row.find("td:nth-child(3)").text(); // Value of the third <td>
-									var price = row.find("td:nth-child(4)").text(); // Value of the fourth <td>
+		// Calculate total cost
+		var totalCost = parseFloat(quantity) * parseFloat(unit);
 
-									$.ajax({
-										url: "Home_con/test_item",
-										dataType: "json",
-										type: "post",
-										data: {
-											sample_id: sample_id,
-											p_id: p_id,
-											testName: testName,
-											quantity: quantity,
-											unit: unit,
-											price: price,
-										},
-										success: function (response) {
-											if (response.success) {
-												// console.log(response);
-												$("#billing-modal").modal("hide");
-											} else {
-												if (response.errors) {
-													// Display validation errors as flash messages
-													alert(response.errors);
-												}
-											}
-										},
-									});
+		// Append a new row to the table body
+		$("#item-list tbody").append(
+			"<tr>" +
+				"<td>" +
+				testName +
+				"</td>" +
+				"<td>" +
+				quantity +
+				"</td>" +
+				"<td>" +
+				unit +
+				"</td>" +
+				"<td>" +
+				price +
+				"</td>" +
+				"<td><button class='btn btn-danger btn-sm remove-row' id='remove_btn'  onclick='rem_item($(this))'>Remove</button></td>" +
+				"</tr>"
+		);
 
-									// items.push(item); // Add the row data to the items array
-								});
-							} else {
-								if (response.errors) {
-									// Display validation errors as flash messages
-									alert(response.errors);
-								}
-							}
-						},
-					});
-				} else {
-					alert(response.errors);
-				}
-			},
-		});
+		var subTotal = parseFloat($("#sub_total").val() || 0);
+		subTotal += totalCost;
+		$("#sub_total").val(subTotal);
+		$("#grand_total").val(subTotal);
+		var discount_tab = $("#dis_per").val();
+		$("#dis_per").val(discount_tab).trigger("input");
 	});
 });
+
+// on click rmove button
+$(document).ready(function () {
+	$(document).on("click", "#remove_btn", function () {
+		var row = $(this).closest("tr");
+
+		var price = row.find("td:eq(3)").text();
+		var total = $("#sub_total").val();
+		var final = total - price;
+		$("#sub_total").val(final);
+
+		var discount_tab = $("#dis_per").val();
+		$("#dis_per").val(discount_tab).trigger("input");
+		row.remove();
+	});
+});
+
+//on input discount %
+$(document).ready(function () {
+	$("#dis_per").on("input", function () {
+		// Get input values
+		var subTotal = parseFloat($("#sub_total").val()) || 0;
+		var discountPercent = parseFloat($(this).val()) || 0;
+
+		// Calculate discount amount
+		var discountAmount = (subTotal * discountPercent) / 100;
+
+		// Update discount amount field
+		$("#dis_amnt").val(discountAmount);
+
+		// Calculate grand total
+		var grandTotal = subTotal - discountAmount;
+
+		// Update grand total field
+		$("#grand_total").val(grandTotal);
+	});
+});
+//insert item in database
+$(document).on("click", "#regbill_btn", function () {
+	var total = $("#sub_total").val();
+
+	if (parseFloat(total) === 0) {
+		displayFlashMessage("Please insert the form !", 3000, "flash-messages2"); // Display for 3 seconds
+		return;
+	}
+	$.ajax({
+		url: "Home_con/getdate",
+		dataType: "json",
+		type: "post",
+		data: {},
+		success: function (response) {
+			if (response.success) {
+				// console.log(response.data);
+				var bill_dates = response.data;
+
+				var p_id = $("#p_id").val();
+				var sub_total = $("#sub_total").val();
+				var dis_per = $("#dis_per").val();
+				var dis_amnt = $("#dis_amnt").val();
+				var grand_total = $("#grand_total").val();
+
+				$.ajax({
+					url: "Home_con/save_billing",
+					dataType: "json",
+					type: "post",
+					data: {
+						bill_date: bill_dates,
+						p_id: p_id,
+						sub_total: sub_total,
+						dis_per: dis_per,
+						dis_amnt: dis_amnt,
+						grand_total: grand_total,
+					},
+					success: function (response) {
+						if (response.success) {
+							// console.log(response);
+							var sample_id = response.data;
+							// alert(sample_id);
+
+							//insert item in database after insert billing information
+							$("#item-list tbody tr").each(function () {
+								var row = $(this); // Current <tr> element
+								var testName = row.find("td:nth-child(1)").text(); // Value of the first <td>
+								var quantity = row.find("td:nth-child(2)").text(); // Value of the second <td>
+								var unit = row.find("td:nth-child(3)").text(); // Value of the third <td>
+								var price = row.find("td:nth-child(4)").text(); // Value of the fourth <td>
+
+								$.ajax({
+									url: "Home_con/test_item",
+									dataType: "json",
+									type: "post",
+									data: {
+										sample_id: sample_id,
+										p_id: p_id,
+										testName: testName,
+										quantity: quantity,
+										unit: unit,
+										price: price,
+									},
+									success: function (response) {
+										if (response.success) {
+											// console.log(response);
+											$("#bills_form")[0].reset();
+											$("#item-list tbody").empty();
+											$("#billing-modal").modal("hide");
+											$(document).off("click", "#but_add");
+										} else {
+											if (response.errors) {
+												// Display validation errors as flash messages
+												alert(response.errors);
+											}
+										}
+									},
+								});
+
+								// items.push(item); // Add the row data to the items array
+							});
+						} else {
+							if (response.errors) {
+								// Display validation errors as flash messages
+								alert(response.errors);
+							}
+						}
+					},
+				});
+			} else {
+				alert(response.errors);
+			}
+		},
+	});
+});
+
 // discount % validation
 $("#dis_per").on("input", function () {
 	var discount_percentage = parseInt($(this).val());
