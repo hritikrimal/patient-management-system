@@ -55,12 +55,14 @@ $(document).ready(function () {
 					const data = response.alldata;
 					$(".sample").text("Bill Number: " + data[0].sample_id);
 					$(".date").text("Billing Date: " + data[0].billing_date);
-					$("#name").val(data[0].Name);
-					$("#patient_id").val(data[0].Patientid);
-					$("#subtotal").val(data[0].subtotal);
-					$("#discountper").val(data[0].discount_percent);
-					$("#discountamt").val(data[0].discount_amount);
-					$("#grandtotal").val(data[0].net_total);
+
+					$(".Patient_name").text("Name: " + data[0].Name);
+					$(".Patient_id").text("Patient Id: " + data[0].Patientid);
+
+					$(".subtotal").text(data[0].subtotal);
+					$(".discountper").text(data[0].discount_percent);
+					$(".discountamt").text(data[0].discount_amount);
+					$(".grandtotal").text(data[0].net_total);
 					// appending the data
 					function show() {
 						var tbody = "";

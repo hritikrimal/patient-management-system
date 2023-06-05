@@ -91,13 +91,11 @@
                                         <form id="form" class="row g-3">
 
                                             <div class="col-md-6">
-                                                <label for="name" class="form-label bold">Name</label>
-                                                <input type="text" class="form-control" id="name" disabled placeholder="name" required>
-
+                                                <div class="Patient_name"></div>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="patient_id" class="form-label bold">Patient Id</label>
-                                                <input type="number" class="form-control" id="patient_id" disabled placeholder="patient_id" required>
+
+                                                <div class="Patient_id"></div>
 
                                             </div>
                                             <hr>
@@ -129,38 +127,37 @@
                                                 <tbody>
                                                     <tr>
                                                         <td class="left">
-                                                            <strong>Subtotal</strong>
+                                                            Subtotal
                                                         </td>
                                                         <td class="right">
-                                                            <input type="test" name="subtotal" id="subtotal" disabled class="form-control">
+                                                            <div class="subtotal"></div>
                                                         </td>
 
                                                     </tr>
                                                     <tr>
                                                         <td class="left">
-                                                            <strong>Discount %</strong>
+                                                            Discount %
                                                         </td>
                                                         <td class="right">
-                                                            <input type="test" name="discountper" id="discountper" disabled class="form-control">
+                                                            <div class="discountper"></div>
 
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="left">
-                                                            <strong>Discount Amount</strong>
+                                                            Discount Amount
                                                         </td>
                                                         <td class="right">
-                                                            <input type="test" name="discountamt" id="discountamt" disabled class="form-control">
+                                                            <div class="discountamt"></div>
 
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="left">
-                                                            <strong>Grand Total</strong>
-                                                        </td>
+                                                            Grand Total
                                                         <td class="right">
 
-                                                            <input type="test" name="grandtotal" id="grandtotal" disabled class="form-control">
+                                                            <div class="grandtotal"></div>
 
 
                                                         </td>
