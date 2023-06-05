@@ -1,5 +1,13 @@
 $(document).ready(function () {
-	// show datatables
+	// on click reg and billing modal off btn
+	$("#billing_modal_close").click(function () {
+		$(document).off("click", "#but_add");
+	});
+	// on click reg and billing modal off btn
+
+	$("#modal_close_btn").click(function () {
+		$(document).off("click", "#but_add");
+	});
 
 	//show modal
 	$("#modalbutton").click(function () {
@@ -328,8 +336,9 @@ $(document).on("click", "#reg_bill", function () {
 		success: function (response) {
 			if (response.success) {
 				// console.log(response.data);
-				$("#p_id").val(Patientid);
-				$("#bill_date").val(response.data);
+				// $("#p_id").val(Patientid);
+				$(".p_id").text("Patient Id: " + Patientid);
+				$(".bill_date").text("Date: " + response.data);
 
 				$("#billing-modal").modal("show");
 			} else {
@@ -363,7 +372,7 @@ $(document).on("click", "#reg_bill", function () {
 		var unit = $("#t_unit").val();
 		var price = $("#t_price").val();
 		// alert(testName);
-		alert();
+		// alert();
 		if (!testName) {
 			displayFlashMessage("Test Name is required!", 3000, "flash-messages2");
 			return;
@@ -472,7 +481,9 @@ $(document).on("click", "#regbill_btn", function () {
 				// console.log(response.data);
 				var bill_dates = response.data;
 
-				var p_id = $("#p_id").val();
+				var p_id = $(".p_id").text().replace("Patient Id: ", "");
+				console.log(p_id);
+
 				var sub_total = $("#sub_total").val();
 				var dis_per = $("#dis_per").val();
 				var dis_amnt = $("#dis_amnt").val();

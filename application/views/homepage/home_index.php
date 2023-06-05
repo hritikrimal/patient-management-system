@@ -195,7 +195,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="new-modalLabel">Basic Information</h5>
+                        <h5 class="modal-title" id="new-modalLabel">Information View</h5>
                         <button type="button" id="new-cross_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div id="new-m_body" class="modal-body">
@@ -264,51 +264,49 @@
 
         <!-- reg & billing modal -->
         <div class="modal fade" id="billing-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">.
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="exampleModalLabel">Generate Bill</h5>
+                        <button type="button" id="billing_modal_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div class="container">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row g-3 ">
+                                        <div class="p_id col-md-3">
 
-
-                        <form id="info_form" class="row g-3 ">
-
-
-                            <div class="col-md-7 ">
-
-                                <label for="bill_date" class="form-label">Date</label>
-                                <input type="text" id="bill_date" disabled name="bill_date">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="p_id" class="form-label">Patient Id</label>
-                                <input type="number" id="p_id" disabled name="p_id">
-                            </div>
-                        </form>
-                        <div class="row">
-                            <form id="bill_form" class="row g-3 ">
-                                <div id="flash-messages2"></div>
-
-
-                                <div class="col-md-3">
-                                    <label for="test_name" class="form-label">Test Name</label>
-                                    <input type="text" class="form-control" id="test_name" required name="test_name">
+                                        </div>
+                                        <div class="bill_date col-md-9 " style="text-align: right;">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="t_unit" class="form-label">Unit price</label>
-                                    <input type="number" class="form-control" id="t_unit" required name="t_unit">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="t_qty" class="form-label">Quantity</label>
-                                    <input type="number" class="form-control" id="t_qty" required name="t_qty">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="t_price" class="form-label">Price</label>
-                                    <input type="number" class="form-control" id="t_price" disabled required name="t_price">
-                                </div>
-                                <!-- <div class="col-md-2">
+
+                                <div class="card-body">
+
+                                    <div class="table-responsive-sm">
+                                        <form id="form" class="row g-3">
+                                            <div id="flash-messages2"></div>
+
+
+                                            <div class="col-md-3">
+                                                <label for="test_name" class="form-label">Test Name</label>
+                                                <input type="text" class="form-control" id="test_name" required name="test_name">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="t_unit" class="form-label">Unit price</label>
+                                                <input type="number" class="form-control" id="t_unit" required name="t_unit">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="t_qty" class="form-label">Quantity</label>
+                                                <input type="number" class="form-control" id="t_qty" required name="t_qty">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="t_price" class="form-label">Price</label>
+                                                <input type="number" class="form-control" id="t_price" disabled required name="t_price">
+                                            </div>
+                                            <!-- <div class="col-md-2">
                                     <label for="t_disper" class="form-label">Discount %</label>
                                     <input type="text" class="form-control" id="t_disper" name="t_disper">
                                 </div>
@@ -320,83 +318,87 @@
                                     <label for="t_total" class="form-label">Net Total</label>
                                     <input type="text" class="form-control" id="t_total" name="t_total">
                                 </div> -->
-                                <div class="col-md-1 mt-1">
+                                            <div class="col-md-1 mt-1">
 
 
-                                    <button id="but_add" type="button" class="btn btn-primary mt-5 ">Add</button>
+                                                <button id="but_add" type="button" class="btn btn-primary  ">Add</button>
 
+                                            </div>
+
+
+
+                                        </form>
+
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-12 newbill">
+                                                <table class="table table-bordered" id="item-list">
+                                                    <colgroup>
+                                                        <col width="40%">
+                                                        <col width="10%">
+                                                        <col width="10">
+                                                        <col width="15%">
+                                                        <col width="15%">
+                                                        <!-- <col width="5%"> -->
+                                                    </colgroup>
+                                                    <thead>
+                                                        <tr>
+                                                            <!-- <th class="text-center">SN</th> -->
+                                                            <th class="text-center">TEST NAME</th>
+                                                            <th class="text-center">QUANTITY</th>
+                                                            <th class="text-center">UNIT</th>
+                                                            <!-- <th class="text-center">Cost</th> -->
+                                                            <th class="text-center">Total</th>
+                                                            <th class="text-center">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="items-list">
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <form id="bills_form">
+                                                            <tr>
+                                                                <th class="text-right" colspan="3">Sub Total</th>
+                                                                <th><input type="number" disabled class="form-control" id="sub_total" name="sub_total" value="0"></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="text-right" colspan="3">Discount %</th>
+                                                                <th><input type="number" class="form-control" id="dis_per" name="dis_per" value="0"></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="text-right" colspan="3">Discount Amount</th>
+                                                                <th><input type="number" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th>
+                                                                <th></th>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th class="text-right" colspan="3">Grand Total</th>
+                                                                <th><input type="number" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th>
+                                                            </tr>
+                                                        </form>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
+                            </div>
+
                         </div>
 
-
-                        </form>
-                    </div>
-
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-bordered" id="item-list">
-                                <colgroup>
-                                    <col width="40%">
-                                    <col width="10%">
-                                    <col width="10">
-                                    <col width="15%">
-                                    <col width="15%">
-                                    <!-- <col width="5%"> -->
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <!-- <th class="text-center">SN</th> -->
-                                        <th class="text-center">TEST NAME</th>
-                                        <th class="text-center">QUANTITY</th>
-                                        <th class="text-center">UNIT</th>
-                                        <!-- <th class="text-center">Cost</th> -->
-                                        <th class="text-center">Total</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="items-list">
-                                </tbody>
-                                <tfoot>
-                                    <form id="bills_form">
-                                        <tr>
-                                            <th class="text-right" colspan="3">Sub Total</th>
-                                            <th><input type="number" disabled class="form-control" id="sub_total" name="sub_total" value="0"></th>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-right" colspan="3">Discount %</th>
-                                            <th><input type="number" class="form-control" id="dis_per" name="dis_per" value="0"></th>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-right" colspan="3">Discount Amount</th>
-                                            <th><input type="number" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th>
-                                            <th></th>
-                                        </tr>
-
-                                        <tr>
-                                            <th class="text-right" colspan="3">Grand Total</th>
-                                            <th><input type="number" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th>
-                                        </tr>
-                                    </form>
-                                </tfoot>
-                            </table>
+                        <div class="modal-footer">
+                            <button type="button" id="modal_close_btn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="regbill_btn">Save changes</button>
                         </div>
-                    </div>
-
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="regbill_btn">Save changes</button>
                     </div>
                 </div>
             </div>
+
         </div>
 
-    </div>
 
-
-    <script src="assets/datatable/data_tables.js"></script>
-    <script src="assets/js/homejs.js"></script>
+        <script src="assets/datatable/data_tables.js"></script>
+        <script src="assets/js/homejs.js"></script>
 
 
 </body>

@@ -2,3 +2,9 @@ table#myTable td {
 	font-size: 14px;
 	/* padding: 3 px; */
 }
+.item_table {
+	font-size: 14px;
+}
+.sub_table {
+	font-size: 14px;
+}

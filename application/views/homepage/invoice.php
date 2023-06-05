@@ -118,7 +118,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="row">
+                                    <div class="row sub_table">
 
 
                                         <div class="col-lg-4 col-sm-5 ml-auto">
