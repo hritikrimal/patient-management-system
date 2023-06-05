@@ -17,6 +17,7 @@ $(document).ready(function () {
 		var name = $("#name").val().trim();
 		var age = $("#age").val().trim();
 		var number = $("#p_number").val().trim();
+
 		var country = $("#country").val();
 		var province = $("#province").val();
 		var district = $("#district").val();
@@ -45,7 +46,7 @@ $(document).ready(function () {
 			return;
 		}
 		if (age === "") {
-			displayFlashMessage("Invalid Age !", 3000, "flash-messages1"); // Display for 3 seconds
+			displayFlashMessage("Age is required!", 3000, "flash-messages1"); // Display for 3 seconds
 			return;
 		}
 		if (!age_pattern.test(age)) {
@@ -58,14 +59,18 @@ $(document).ready(function () {
 		}
 		if (number === "") {
 			displayFlashMessage(
-				"Number (98********) is required !",
+				"Phone Number is required !",
 				3000,
 				"flash-messages1"
 			); // Display for 3 seconds
 			return;
 		}
 		if (!number_pattern.test(number)) {
-			displayFlashMessage("Invalid Number!", 3000, "flash-messages1");
+			displayFlashMessage(
+				"Insert a valid Phone Number!",
+				3000,
+				"flash-messages1"
+			);
 			return;
 		}
 		if (!country || !province || !district || !municipality) {
@@ -123,6 +128,24 @@ $(document).ready(function () {
 			},
 		});
 	});
+	// age on click validation
+	$("#age").on("input", function () {
+		var patient_age = parseInt($(this).val());
+
+		if (patient_age < 1 || patient_age > 100) {
+			$(this).val(0);
+		}
+	});
+
+	//phone number on click validation
+	$("#p_number").on("input", function () {
+		var mobileNumber = $(this).val();
+
+		if (mobileNumber.length > 10) {
+			mobileNumber = mobileNumber.slice(0, 10);
+			$(this).val(mobileNumber);
+		}
+	});
 
 	//table fetch
 
@@ -164,12 +187,10 @@ $(document).ready(function () {
 			},
 		});
 	}
+	// Call the fetch function to populate the table and initialize the DataTable
 	fetch();
 
-	// Call the fetch function to populate the table and initialize the DataTable
-
 	//preview the information on click view
-	// TODO: on and off
 	$(document).on("click", "#view", function () {
 		var Patientid = $(this).attr("value");
 		$.ajax({
@@ -343,6 +364,7 @@ $(document).on("click", "#reg_bill", function () {
 				displayFlashMessage("Price is required !", 3000, "flash-messages2"); // Display for 3 seconds
 				return;
 			}
+
 			$("#bill_form")[0].reset();
 
 			// Calculate total cost

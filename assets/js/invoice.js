@@ -16,8 +16,8 @@ $(document).ready(function () {
 						tbody += "<td>" + response.data[key]["billing_date"] + "</td>";
 						tbody += "<td>" + response.data[key]["sample_no"] + "</td>";
 						tbody += "<td>" + response.data[key]["discount_percent"] + "</td>";
-						tbody += "<td>" + response.data[key]["net_total"] + "</td>";
 						tbody += "<td>" + response.data[key]["subtotal"] + "</td>";
+						tbody += "<td>" + response.data[key]["net_total"] + "</td>";
 
 						tbody += `<td>
 					    <div class="d-flex">
@@ -69,9 +69,9 @@ $(document).ready(function () {
 							tbody += "<tr>";
 							tbody += "<td>" + i++ + "</td>";
 							tbody += "<td>" + item.test_items + "</td>";
-							tbody += "<td>" + item.price + "</td>";
+							tbody += "<td>" + item.unit + "</td>";
 							tbody += "<td>" + item.qty + "</td>";
-							tbody += "<td>" + item.subtotal + "</td>";
+							tbody += "<td>" + item.price + "</td>";
 							tbody += "</tr>";
 						});
 						$("#invoive_table").html(tbody);

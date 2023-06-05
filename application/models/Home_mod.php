@@ -30,6 +30,7 @@ class Home_mod extends CI_Model
     }
     public function getuser_info()
     {
+        $this->db->order_by('Patientid', 'desc');
         $user_info = $this->db->get('patients');
         if ($user_info->num_rows() > 0) {
             $result = $user_info->result();

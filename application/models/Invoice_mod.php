@@ -9,6 +9,7 @@ class Invoice_mod extends CI_Model
 
     public function get_billing_info()
     {
+        $this->db->order_by('sample_no', 'desc');
         $bill_info = $this->db->get('patient_billing');
         if ($bill_info->num_rows() > 0) {
             $result = $bill_info->result();

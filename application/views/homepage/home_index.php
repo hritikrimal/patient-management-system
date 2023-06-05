@@ -92,12 +92,14 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="age" class="form-label bold">Age</label>
-                                <input type="number" class="form-control" id="age" placeholder="age" required>
+                                <input type="number" class="form-control" id="age" placeholder="age" required required min="10" max="99">
+                                <small class="text-muted">Please insert age between 0 and 100</small>
 
                             </div>
                             <div class="col-md-6">
                                 <label for="p_number" class="form-label bold">Mobile Number</label>
-                                <input type="number" class="form-control" id="p_number" placeholder="contact number" required>
+                                <input type="number" class="form-control" id="p_number" placeholder="9*********" required>
+                                <small class="text-muted">Please enter a 10-digit mobile number.</small>
 
                             </div>
 
