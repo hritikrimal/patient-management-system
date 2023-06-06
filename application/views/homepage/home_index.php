@@ -286,65 +286,25 @@
                                 <div class="card-body">
 
                                     <div class="table-responsive-sm">
-                                        <form id="form" class="row g-3">
+
+                                        <div class="row">
                                             <div id="flash-messages2"></div>
 
-
-                                            <div class="col-md-3">
-                                                <label for="test_name" class="form-label">Test Name</label>
-                                                <input type="text" class="form-control" id="test_name" required name="test_name">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="t_unit" class="form-label">Unit price</label>
-                                                <input type="number" class="form-control" id="t_unit" required name="t_unit">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="t_qty" class="form-label">Quantity</label>
-                                                <input type="number" class="form-control" id="t_qty" required name="t_qty">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label for="t_price" class="form-label">Price</label>
-                                                <input type="number" class="form-control" id="t_price" disabled required name="t_price">
-                                            </div>
-                                            <!-- <div class="col-md-2">
-                                    <label for="t_disper" class="form-label">Discount %</label>
-                                    <input type="text" class="form-control" id="t_disper" name="t_disper">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="t_disamo" class="form-label">Discount Amount</label>
-                                    <input type="text" class="form-control" id="t_disamo" name="t_disamo">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="t_total" class="form-label">Net Total</label>
-                                    <input type="text" class="form-control" id="t_total" name="t_total">
-                                </div> -->
-                                            <div class="col-md-1 mt-1">
-
-
-                                                <button id="but_add" type="button" class="btn btn-primary  ">Add</button>
-
-                                            </div>
-
-
-
-                                        </form>
-
-                                        <hr>
-                                        <div class="row">
                                             <div class="col-md-12 newbill">
                                                 <table class="table table-bordered" id="item-list">
-                                                    <colgroup>
+                                                    <!-- <colgroup>
                                                         <col width="40%">
                                                         <col width="10%">
                                                         <col width="10">
                                                         <col width="15%">
-                                                        <col width="15%">
-                                                        <!-- <col width="5%"> -->
-                                                    </colgroup>
+                                                        <col width="15%"> -->
+                                                    <!-- <col width="5%"> -->
+                                                    <!-- </colgroup> -->
                                                     <thead>
                                                         <tr>
                                                             <!-- <th class="text-center">SN</th> -->
                                                             <th class="text-center">TEST NAME</th>
+
                                                             <th class="text-center">QUANTITY</th>
                                                             <th class="text-center">UNIT</th>
                                                             <!-- <th class="text-center">Cost</th> -->
@@ -352,29 +312,64 @@
                                                             <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="items-list">
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <form id="bills_form">
-                                                            <tr>
-                                                                <th class="text-right" colspan="3">Sub Total</th>
-                                                                <th><input type="number" disabled class="form-control" id="sub_total" name="sub_total" value="0"></th>
-                                                            </tr>
-                                                            <tr>
-                                                                <th class="text-right" colspan="3">Discount %</th>
-                                                                <th><input type="number" class="form-control" id="dis_per" name="dis_per" value="0"></th>
-                                                            </tr>
-                                                            <tr>
-                                                                <th class="text-right" colspan="3">Discount Amount</th>
-                                                                <th><input type="number" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th>
-                                                                <th></th>
-                                                            </tr>
+                                                    <tbody id="items_list">
 
-                                                            <tr>
-                                                                <th class="text-right" colspan="3">Grand Total</th>
-                                                                <th><input type="number" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th>
-                                                            </tr>
-                                                        </form>
+                                                    </tbody>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td> <input type="text" class="form-control" id="test_name" required name="test_name">
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" class="form-control" id="t_qty" required name="t_qty">
+
+
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" class="form-control" id="t_unit" required name="t_unit">
+
+                                                            </td>
+                                                            <td>
+                                                                <div class="t_price text-right mt-2"></div>
+                                                                <!-- <input type="number" class="form-control" id="t_price" disabled required name="t_price"> -->
+
+                                                            </td>
+                                                            <td>
+                                                                <button id="but_add" type="button" class="btn btn-primary  ">Add</button>
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                    <tfoot>
+
+                                                        <tr>
+                                                            <th class="text-right" colspan="3">Sub Total</th>
+                                                            <th>
+                                                                <div class="sub_total text-right mt-2 form-control">0</div>
+                                                            </th>
+                                                            <!-- <th><input type="number" disabled class="form-control" id="sub_total" name="sub_total" value="0"></th> -->
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-right" colspan="3">Discount %</th>
+                                                            <th><input type="number" class="form-control" id="dis_per" name="dis_per" value=""></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-right" colspan="3">Discount Amount</th>
+                                                            <!-- <th><input type="number" disabled class="form-control" id="dis_amnt" name="dis_amnt" value="0"></th> -->
+                                                            <th>
+                                                                <div class="dis_amnt text-right mt-2 form-control">0</div>
+
+                                                            </th>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th class="text-right" colspan="3">Grand Total</th>
+                                                            <th>
+                                                                <div class="grand_total text-right mt-2 form-control">0</div>
+                                                            </th>
+                                                            <!-- <th><input type="number" disabled class="form-control" id="grand_total" name="grand_total" value="0"></th> -->
+                                                        </tr>
+
                                                     </tfoot>
                                                 </table>
                                             </div>

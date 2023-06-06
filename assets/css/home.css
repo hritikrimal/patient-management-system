@@ -21,9 +21,9 @@ input[type="number"]::-webkit-outer-spin-button {
 .newbill {
 	font-size: 14px;
 }
-#but_add {
+/* #but_add {
 	margin-top: 2.7rem;
-}
+} */
 .bg-body-tertiary {
 	background-color: snow !important;
 }
