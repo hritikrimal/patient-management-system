@@ -24,3 +24,12 @@ input[type="number"]::-webkit-outer-spin-button {
 #but_add {
 	margin-top: 2.7rem;
 }
+.bg-body-tertiary {
+	background-color: snow !important;
+}
+body {
+	background-color: whitesmoke;
+}
+.modal-body {
+	background-color: whitesmoke;
+}

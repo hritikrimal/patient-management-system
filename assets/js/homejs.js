@@ -1,14 +1,4 @@
 $(document).ready(function () {
-	// on click reg and billing modal off btn
-	$("#billing_modal_close").click(function () {
-		$(document).off("click", "#but_add");
-	});
-	// on click reg and billing modal off btn
-
-	$("#modal_close_btn").click(function () {
-		$(document).off("click", "#but_add");
-	});
-
 	//show modal
 	$("#modalbutton").click(function () {
 		$("#infomodal").modal("show");
@@ -21,6 +11,7 @@ $(document).ready(function () {
 	$("#cross_close").click(function () {
 		$("#form")[0].reset();
 	});
+	//save registration
 	$("#save_button").click(function () {
 		var name = $("#name").val().trim();
 		var age = $("#age").val().trim();
@@ -155,8 +146,7 @@ $(document).ready(function () {
 		}
 	});
 
-	//table fetch
-
+	//table fetch of registration information
 	function fetch() {
 		$.ajax({
 			url: "Home_con/fetch_info",
@@ -195,10 +185,10 @@ $(document).ready(function () {
 			},
 		});
 	}
-	// Call the fetch function to populate the table and initialize the DataTable
+	// Call the fetch function to get table
 	fetch();
 
-	//preview the information on click view
+	//preview the detail information on click view
 	$(document).on("click", "#view", function () {
 		var Patientid = $(this).attr("value");
 		$.ajax({
@@ -336,7 +326,6 @@ $(document).on("click", "#reg_bill", function () {
 		success: function (response) {
 			if (response.success) {
 				// console.log(response.data);
-				// $("#p_id").val(Patientid);
 				$(".p_id").text("Patient Id: " + Patientid);
 				$(".bill_date").text("Date: " + response.data);
 
@@ -347,9 +336,15 @@ $(document).on("click", "#reg_bill", function () {
 		},
 	});
 
-	//on click add
+	// on click reg and billing modal off btn
+	$("#billing_modal_close").click(function () {
+		$(document).off("click", "#but_add");
+	});
+	// on click reg and billing modal off btn
 
-	// $("#but_add").click(function () {
+	$("#modal_close_btn").click(function () {
+		$(document).off("click", "#but_add");
+	});
 
 	//insert unit and qty to get total
 	$(document).ready(function () {
@@ -364,15 +359,14 @@ $(document).on("click", "#reg_bill", function () {
 			}
 		});
 	});
-
+	//on click add
 	$(document).on("click", "#but_add", function () {
 		// alert();
 		var testName = $("#test_name").val();
 		var quantity = $("#t_qty").val();
 		var unit = $("#t_unit").val();
 		var price = $("#t_price").val();
-		// alert(testName);
-		// alert();
+
 		if (!testName) {
 			displayFlashMessage("Test Name is required!", 3000, "flash-messages2");
 			return;
@@ -427,7 +421,7 @@ $(document).on("click", "#reg_bill", function () {
 	});
 });
 
-// on click rmove button
+// on click remove button
 $(document).ready(function () {
 	$(document).on("click", "#remove_btn", function () {
 		var row = $(this).closest("tr");
@@ -482,7 +476,7 @@ $(document).on("click", "#regbill_btn", function () {
 				var bill_dates = response.data;
 
 				var p_id = $(".p_id").text().replace("Patient Id: ", "");
-				console.log(p_id);
+				// console.log(p_id);
 
 				var sub_total = $("#sub_total").val();
 				var dis_per = $("#dis_per").val();
@@ -505,7 +499,6 @@ $(document).on("click", "#regbill_btn", function () {
 						if (response.success) {
 							// console.log(response);
 							var sample_id = response.data;
-							// alert(sample_id);
 
 							//insert item in database after insert billing information
 							$("#item-list tbody tr").each(function () {
@@ -542,8 +535,6 @@ $(document).on("click", "#regbill_btn", function () {
 										}
 									},
 								});
-
-								// items.push(item); // Add the row data to the items array
 							});
 						} else {
 							if (response.errors) {

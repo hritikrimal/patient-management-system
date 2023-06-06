@@ -51,7 +51,7 @@ $(document).ready(function () {
 			},
 			success: function (response) {
 				if (response.success) {
-					console.log(response);
+					// console.log(response);
 					const data = response.alldata;
 					$(".sample").text("Bill Number: " + data[0].sample_id);
 					$(".date").text("Billing Date: " + data[0].billing_date);

@@ -1,3 +1,6 @@
+body {
+	background-color: whitesmoke;
+}
 table#myTable td {
 	font-size: 14px;
 	/* padding: 3 px; */
@@ -7,4 +10,10 @@ table#myTable td {
 }
 .sub_table {
 	font-size: 14px;
+}
+.bg-body-tertiary {
+	background-color: snow !important;
+}
+.modal-body {
+	background-color: whitesmoke;
 }
