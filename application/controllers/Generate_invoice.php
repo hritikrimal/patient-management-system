@@ -14,7 +14,7 @@ class Generate_invoice extends CI_Controller
     {
 
         $billinginfo = $this->Invoice_models->get_billing_info();
-        // var_dump($billinginfo);
+
         if ($billinginfo) {
             $response['success'] = true;
             $response['data'] =  $billinginfo;
@@ -28,11 +28,10 @@ class Generate_invoice extends CI_Controller
 
     public function fetch_invoice()
     {
-        $get_all_info = $this->Invoice_models->get_datbase_info();
-        // print_r($get_all_info);
-        if ($get_all_info) {
+        $detail_billinginfo = $this->Invoice_models->get_detail_billing_info();
+        if ($detail_billinginfo) {
             $response['success'] = true;
-            $response['alldata'] =  $get_all_info;
+            $response['alldata'] =  $detail_billinginfo;
         } else {
             $response['success'] = false;
             $response['errors'] = "No Data Available";

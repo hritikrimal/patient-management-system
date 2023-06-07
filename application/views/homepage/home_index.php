@@ -334,7 +334,7 @@
 
                                                             </td>
                                                             <td>
-                                                                <button id="but_add" type="button" class="btn btn-primary  ">Add</button>
+                                                                <button id="but_add" type="button" class="btn btn-primary  ">Submit</button>
 
                                                             </td>
                                                         </tr>

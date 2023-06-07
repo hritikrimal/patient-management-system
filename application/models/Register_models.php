@@ -7,7 +7,7 @@ class Register_models extends CI_Model
         parent::__construct();
     }
     //for insert in database of patient informattion
-    public function insertinfo()
+    public function insert_registration_data()
     {
         $info = array();
         $info['Name'] = $this->input->post("name");
@@ -28,7 +28,7 @@ class Register_models extends CI_Model
             return false;
         }
     }
-    public function getuser_info()
+    public function get_registration_data()
     {
         $this->db->order_by('Patientid', 'desc');
         $user_info = $this->db->get('patients');
@@ -40,7 +40,7 @@ class Register_models extends CI_Model
         }
     }
 
-    public function get_all_user_info()
+    public function get_detail_registration_data()
     {
         $patientid = $this->input->post('patientid');
         $all_user_info = $this->db->get_where('patients', array('Patientid' => $patientid));
@@ -56,7 +56,6 @@ class Register_models extends CI_Model
 
     public function insert_billings()
     {
-
         date_default_timezone_set('Asia/Kathmandu');
         $dateTime = date('Y-m-d H:i:s');
         $bill = array();
@@ -74,16 +73,15 @@ class Register_models extends CI_Model
             $this->db->insert('patient_billing', $bill);
             $latest_sample_no = $this->db->insert_id();
 
+            $test_records = array();
+
             foreach ($items as $item) {
-
-
-                $this->form_validation->reset_validation(); // Reset validation rules for each item
-                $this->form_validation->set_data($item); // Set item data for validation
+                $this->form_validation->reset_validation();
+                $this->form_validation->set_data($item);
                 $this->form_validation->set_rules('testName', 'Test Name', 'required');
                 $this->form_validation->set_rules('quantity', 'Quantity', 'required');
                 $this->form_validation->set_rules('unit', 'Unit', 'required');
                 $this->form_validation->set_rules('price', 'Price', 'required');
-
 
                 if ($this->form_validation->run() == true) {
                     $test = array();
@@ -93,12 +91,17 @@ class Register_models extends CI_Model
                     $test['qty'] = $item['quantity'];
                     $test['unit'] = $item['unit'];
                     $test['price'] = $item['price'];
-                    $this->db->insert('test_record', $test);
+
+                    $test_records[] = $test; // Add the test record to the array
                 } else {
                     // Item validation failed
                     $this->db->trans_rollback(); // Rollback transaction
                     return false;
                 }
+            }
+
+            if (!empty($test_records)) {
+                $this->db->insert_batch('test_record', $test_records);
             }
 
             if ($this->db->trans_status() === false) {

@@ -140,7 +140,7 @@ $(document).ready(function () {
 		var patient_age = parseInt($(this).val());
 
 		if (patient_age < 1 || patient_age > 100) {
-			$(this).val(0);
+			$(this).val("");
 		}
 	});
 
@@ -383,7 +383,7 @@ $(document).on("click", "#reg_bill", function () {
 	//on click add
 	$(document).on("click", "#but_add", function () {
 		// alert();
-		var testName = $("#test_name").val();
+		var testName = $("#test_name").val().trim();
 		var quantity = $("#t_qty").val();
 		var unit = $("#t_unit").val();
 		var price = $(".t_price").text();
@@ -457,6 +457,22 @@ $(document).on("click", "#reg_bill", function () {
 		$("#dis_per").val(discount_tab).trigger("input");
 	});
 });
+// on click  qty
+$("#t_qty").on("input", function () {
+	var quantity = $("#t_qty").val();
+	var pattern = /^\s*([0-9]+)\s*$/;
+	if (quantity < 0 || quantity > 1000 || !pattern.test(quantity)) {
+		$(this).val("");
+	}
+});
+//on click unit price
+$("#t_unit").on("input", function () {
+	var unit = $("#t_unit").val();
+	var pattern = /^\s*([0-9]+)\s*$/;
+	if (unit < 0 || unit > 10000 || !pattern.test(unit)) {
+		$(this).val("");
+	}
+});
 
 // on click remove button
 $(document).ready(function () {
@@ -502,7 +518,7 @@ $(document).on("click", "#regbill_btn", function () {
 	var total = $(".sub_total").text();
 
 	if (parseFloat(total) === 0) {
-		displayFlashMessage("Please insert the form !", 3000, "flash-messages2"); // Display for 3 seconds
+		displayFlashMessage("Please submit the form !", 3000, "flash-messages2"); // Display for 3 seconds
 		return;
 	}
 	var p_id = $(".p_id").text().replace("Patient Id: ", "");

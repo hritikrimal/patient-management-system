@@ -31,7 +31,7 @@ class Register extends CI_Controller
 
         if ($this->form_validation->run() == true) {
             $response['success'] = true;
-            $this->Register_models->insertinfo();
+            $this->Register_models->insert_registration_data();
         } else {
             $response['success'] = false;
             $response['errors'] =  strip_tags(validation_errors());
@@ -42,10 +42,10 @@ class Register extends CI_Controller
 
     public function fetch_registration()
     {
-        $userinfo = $this->Register_models->getuser_info();
-        if ($userinfo) {
+        $reg_data = $this->Register_models->get_registration_data();
+        if ($reg_data) {
             $response['success'] = true;
-            $response['infodata'] = $userinfo;
+            $response['infodata'] = $reg_data;
         } else {
             $response['success'] = false;
             $response['errors'] = "No Data Available";
@@ -56,10 +56,10 @@ class Register extends CI_Controller
     //view all data from table patient on click view
     public function fetch_registration_Details()
     {
-        $fetch_all_info = $this->Register_models->get_all_user_info();
-        if ($fetch_all_info) {
+        $reg_detail = $this->Register_models->get_detail_registration_data();
+        if ($reg_detail) {
             $response['success'] = true;
-            $response['data'] = $fetch_all_info;
+            $response['data'] = $reg_detail;
         } else {
             $response['success'] = false;
             $response['errors'] = "No Data Available";
@@ -77,7 +77,6 @@ class Register extends CI_Controller
     public function save_billing_with_items()
     {
         $this->form_validation->set_rules('p_id', 'P ID', 'required');
-        // $this->form_validation->set_rules('bill_date', 'Billing Date', 'required');
         $this->form_validation->set_rules('sub_total', 'Sub Total', 'required|numeric');
         $this->form_validation->set_rules('dis_per', 'Discount Percentage', 'numeric');
         $this->form_validation->set_rules('dis_amnt', 'Discount Amount', 'numeric');

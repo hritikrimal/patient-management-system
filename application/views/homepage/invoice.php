@@ -120,53 +120,56 @@
                                         </table>
                                     </div>
                                     <div class="row sub_table">
+                                        <div class="d-flex justify-content-end">
+
+                                            <div class="col-lg-4 col-md-5 col-sm-5">
+
+                                                <!-- <table class="table table-clear" style="margin-left: 200%;"> -->
+
+                                                <table class="table table-clear">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="left">
+                                                                Subtotal
+                                                            </td>
+                                                            <td class="right">
+                                                                <div class="subtotal"></div>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="left">
+                                                                Discount %
+                                                            </td>
+                                                            <td class="right">
+                                                                <div class="discountper"></div>
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="left">
+                                                                Discount Amount
+                                                            </td>
+                                                            <td class="right">
+                                                                <div class="discountamt"></div>
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="left">
+                                                                Grand Total
+                                                            <td class="right">
+
+                                                                <div class="grandtotal"></div>
 
 
-                                        <div class="col-lg-4 col-sm-5 ml-auto">
-
-                                            <table class="table table-clear" style="margin-left: 200%;">
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="left">
-                                                            Subtotal
-                                                        </td>
-                                                        <td class="right">
-                                                            <div class="subtotal"></div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="left">
-                                                            Discount %
-                                                        </td>
-                                                        <td class="right">
-                                                            <div class="discountper"></div>
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="left">
-                                                            Discount Amount
-                                                        </td>
-                                                        <td class="right">
-                                                            <div class="discountamt"></div>
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="left">
-                                                            Grand Total
-                                                        <td class="right">
-
-                                                            <div class="grandtotal"></div>
-
-
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
+
 
                                     </div>
 

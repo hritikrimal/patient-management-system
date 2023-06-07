@@ -53,21 +53,22 @@ $(document).ready(function () {
 				if (response.success) {
 					console.log(response);
 					const data = response.alldata;
-					$(".sample").text("Bill Number: " + data[0].sample_id);
-					$(".date").text("Billing Date: " + data[0].billing_date);
 
-					$(".Patient_name").text("Name: " + data[0].Name);
-					$(".Patient_id").text("Patient Id: " + data[0].Patientid);
+					$(".date").text("Billing Date: " + data.row.billing_date);
+					$(".Patient_name").text("Name: " + data.row.Name);
+					$(".Patient_id").text("Patient Id: " + data.row.Patientid);
 
-					$(".subtotal").text(data[0].subtotal);
-					$(".discountper").text(data[0].discount_percent);
-					$(".discountamt").text(data[0].discount_amount);
-					$(".grandtotal").text(data[0].net_total);
-					// appending the data
+					$(".subtotal").text(data.row.subtotal);
+					$(".discountper").text(data.row.discount_percent);
+					$(".discountamt").text(data.row.discount_amount);
+					$(".grandtotal").text(data.row.net_total);
+					$(".sample").text("Bill Number: " + data.row.sample_no);
+
+					// Appending the data
 					function show() {
 						var tbody = "";
 						var i = 1;
-						data.forEach(function (item) {
+						data.array.forEach(function (item) {
 							tbody += "<tr>";
 							tbody += "<td>" + i++ + "</td>";
 							tbody += "<td>" + item.test_items + "</td>";

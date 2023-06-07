@@ -19,19 +19,27 @@ class Invoice_models extends CI_Model
         }
     }
 
-    public function get_datbase_info()
+    public function get_detail_billing_info()
     {
         $sampleNo = $this->input->post("sampleno_id");
 
-        $this->db->select('p.Name,p.Patientid, pb.billing_date, pb.subtotal, pb.discount_percent, pb.discount_amount, pb.net_total, tr.test_items, tr.qty,tr.sample_id, tr.unit, tr.price');
+        $this->db->select('p.Name, p.Patientid,pb.sample_no, pb.billing_date, pb.subtotal, pb.discount_percent, pb.discount_amount, pb.net_total');
         $this->db->from('patients AS p');
         $this->db->join('patient_billing AS pb', 'p.Patientid = pb.P_id');
-        $this->db->join('test_record AS tr', 'pb.sample_no = tr.sample_id');
-        $this->db->where('tr.sample_id',  $sampleNo);
+        $this->db->where('pb.sample_no', $sampleNo);
 
-        $query = $this->db->get();
-        if ($query) {
-            return $query->result();
+        $row_query = $this->db->get();
+
+        $this->db->select('tr.test_items, tr.qty, tr.unit, tr.price');
+        $this->db->from('test_record AS tr');
+        $this->db->where('tr.sample_id', $sampleNo);
+
+        $array_query = $this->db->get();
+
+        if ($row_query && $array_query) {
+            $result['row'] = $row_query->row();
+            $result['array'] = $array_query->result();
+            return $result;
         } else {
             return false;
         }
