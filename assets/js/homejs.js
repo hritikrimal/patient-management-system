@@ -103,7 +103,7 @@ $(document).ready(function () {
 		}
 
 		$.ajax({
-			url: "Home_con/save_info",
+			url: "Register/save_registration",
 			dataType: "json",
 			type: "POST",
 			data: {
@@ -157,7 +157,7 @@ $(document).ready(function () {
 	//table fetch of registration information
 	function fetch() {
 		$.ajax({
-			url: "Home_con/fetch_info",
+			url: "Register/fetch_registration",
 			dataType: "json",
 			type: "get",
 			success: function (response) {
@@ -200,7 +200,7 @@ $(document).ready(function () {
 	$(document).on("click", "#view", function () {
 		var Patientid = $(this).attr("value");
 		$.ajax({
-			url: "Home_con/fetch_all",
+			url: "Register/fetch_registration_Details",
 			dataType: "json",
 			type: "post",
 			data: {
@@ -541,7 +541,7 @@ $(document).on("click", "#regbill_btn", function () {
 	});
 
 	$.ajax({
-		url: "Home_con/save_billing_with_items",
+		url: "Register/save_billing_with_items",
 		dataType: "json",
 		type: "post",
 		data: data,

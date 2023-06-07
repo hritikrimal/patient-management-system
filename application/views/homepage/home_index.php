@@ -24,7 +24,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url() . 'Home_con/invoice_view' ?>">Billing</a>
+                        <a class="nav-link" href="<?php echo base_url() . 'Register/View_invoice' ?>">Billing</a>
                     </li>
                 </ul>
             </div>

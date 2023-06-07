@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Invoice_mod extends CI_Model
+class Invoice_models extends CI_Model
 {
     public function __construct()
     {

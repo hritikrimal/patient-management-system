@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	function fetch() {
 		$.ajax({
-			url: "/first_project/Invoice_con/billing_info",
+			url: "/first_project/Generate_invoice/fetch_billing",
 			dataType: "json",
 			type: "post",
 			data: {},
@@ -43,7 +43,7 @@ $(document).ready(function () {
 		// alert(sampleno_id);
 		$("#bill_modal").modal("show");
 		$.ajax({
-			url: "/first_project/Invoice_con/get_all",
+			url: "/first_project/Generate_invoice/fetch_invoice",
 			dataType: "json",
 			type: "post",
 			data: {

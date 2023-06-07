@@ -1,19 +1,19 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Invoice_con extends CI_Controller
+class Generate_invoice extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("Invoice_mod");
+        $this->load->model("Invoice_models");
     }
     // view page
 
-    public function billing_info()
+    public function fetch_billing()
     {
 
-        $billinginfo = $this->Invoice_mod->get_billing_info();
+        $billinginfo = $this->Invoice_models->get_billing_info();
         // var_dump($billinginfo);
         if ($billinginfo) {
             $response['success'] = true;
@@ -26,9 +26,9 @@ class Invoice_con extends CI_Controller
         echo json_encode($response);
     }
 
-    public function get_all()
+    public function fetch_invoice()
     {
-        $get_all_info = $this->Invoice_mod->get_datbase_info();
+        $get_all_info = $this->Invoice_models->get_datbase_info();
         // print_r($get_all_info);
         if ($get_all_info) {
             $response['success'] = true;
